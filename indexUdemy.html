@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    .toggleBackground{
+        background-color: blueviolet;
+        color: white;
+    }
+    .checkout{
+      
+        text-decoration: line-through;
+    }
+</style>
+<body>
+    <main>
+        <h1 id ="h">Hej</h1>
+        <button id="btn1">Click this button</button>
+
+        <ul>
+            <li class="todoItem">Go to school</li>
+            <li class="todoItem">Go to gym</li>
+            <li class="todoItem">Go to shopping</li>
+            <li class="todoItem">Cook dinner</li>
+        </ul>
+
+    </main>
+    <script>
+      
+      //Hover + checkout
+       const todoItems = document.querySelectorAll(".todoItem");
+
+       for(var i = 0; i < todoItems.length; i++){
+           todoItems[i].addEventListener("mouseover", function(){
+            this.style.backgroundColor = "blue";
+            this.style.color = "white"
+        })
+        todoItems[i].addEventListener("mouseout", function(){
+            this.style.backgroundColor = "white";
+           this.style.color = "black"
+        }) 
+        todoItems[i].addEventListener("click", function(){
+           this.classList.add("checkout")
+       })
+       }
+
+      
+    </script>
+</body>
+</html>
