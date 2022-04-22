@@ -3,6 +3,8 @@ const todoList =document.getElementById('todoList')
 const newItem = document.getElementById('addTodo')
 const row = document.getElementsByTagName('tr');
 
+
+
 const items = [];
 
 function addTodo(text){
@@ -10,29 +12,24 @@ function addTodo(text){
     const todo = {
         id: Date.now(),
         text,
-        checked: false
+        isChecked: false
     }
     items.push(todo);
-    getItems(todo)
+    getItems()
 
     console.log(items)
     console.log(todo)
 }
 
-function getItems(todo){
+function getItems(){
     todoList.innerHTML = " ";
-
-    const isChecked = todo.checked ? "done" : " ";
-    
     for(var i = 0; i < items.length; i++){
         todoList.innerHTML +=
-        `<tr class ="${isChecked}"> 
-          <td><input type="checkbox" class="check-box" id="${todo.id}" /></td>
-            <td>${items[i].text}</td> 
-            <td><button class="btn-delete">Delete</button></td>            
+        `<tr > 
+          <td><input type="checkbox" onclick= "onCheck(id)" class="check-box" id = "${items[i].id}" /></td>
+            <td>${items[i].text}</td>             
+            <td><button onclick= "deleteTodo(id)" id = "${items[i].id}"  class="btn-delete">Delete</button></td>            
         </tr>`
-
-       
     }
 }
 
@@ -42,11 +39,28 @@ addNew.addEventListener("click", function(){
 
     if(text == ''){
         alert ("Type a text"); 
-          
-    }else {
-              
+    }else {  
        addTodo(text);
         newItem.value = "";
-           
     }
 })
+
+function deleteTodo(id){  
+     
+   const foundElement =  items.findIndex(item => item.id == id);
+    
+   if(foundElement > -1){
+       items.splice(foundElement, 1);
+   }
+    getItems();
+}
+
+function onCheck(id){
+    const foundElement =  items.findIndex(item => item.id == id);
+   
+    if(foundElement.isChecked == 'checked'){
+        isChecked = true;
+    }else{
+        false
+    }
+}
