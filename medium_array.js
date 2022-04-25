@@ -26,7 +26,11 @@ function getItems(){
     for(var i = 0; i < items.length; i++){
         todoList.innerHTML +=
         `<tr > 
-          <td><input type="checkbox" onclick= "onCheck(id)" class="check-box" id = "${items[i].id}" /></td>
+          <td><input  type ="checkbox"  class ="check-box" 
+          id = "${items[i].id}"
+          onchange = "onCheck(id)"
+          ${items[i].isChecked ? 'checked':'' }          
+          /></td>
             <td>${items[i].text}</td>             
             <td><button onclick= "deleteTodo(id)" id = "${items[i].id}"  class="btn-delete">Delete</button></td>            
         </tr>`
@@ -55,12 +59,16 @@ function deleteTodo(id){
     getItems();
 }
 
-function onCheck(id){
-    const foundElement =  items.findIndex(item => item.id == id);
+//Check /uncheck task
+function onCheck (id){
    
-    if(foundElement.isChecked == 'checked'){
-        isChecked = true;
-    }else{
-        false
+    const foundElement =  items.findIndex(item => item.id == id);
+
+    if(items[foundElement].isChecked){       
+        items[foundElement].isChecked = false; 
+       
+    } else{
+        items[foundElement].isChecked = true;
     }
+   
 }
